@@ -1,12 +1,8 @@
-<!doctype html>
+//Start of Main Class, pre ES6 refactor
+var Main = React.createClass({displayName: "Main",
+	render: function() {
+		return React.createElement("div",null,"Hello World!");
+	}
+}); //end of Main
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Demo</title>
-</head>
-
-<body>
-  <div class="root"></div>
-</body>
-</html>
+ReactDOM.render(React.createElement(Main),document.getElementById('root'));
