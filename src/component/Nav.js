@@ -1,10 +1,17 @@
-//Start of Main Class, With ES6 refactor
+//Start of Nav Class, With ES6 refactor
 export default class Nav extends React.Component {
   render() {
     return (
-    	<div className="navbar navbar-expand-lg navbar-light bg-light">
-			<a className="navbar-brand" href="localhost:8080">Sociality</a>
-		</div>
+		<nav className="navbar navbar-light bg-light">
+			<a className="navbar-brand" href="#">
+				<img src="../../resources/bootstrap-solid.svg" width="30" height="30" className="d-inline-block align-top mr-2" alt=""></img>
+				<span> Sociality </span>
+			</a>
+			<div className="float-right">
+				<img src="../../resources/account.png" width="30" height="30" className="d-inline-block align-top mr-2" alt=""></img>
+				<img src="../../resources/cog.svg" width="30" height="30" className="d-inline-block align-top" alt=""></img>
+		    </div>
+		</nav>
     )
   }
 }

@@ -124,7 +124,7 @@ ReactDOM.render(React.createElement(Main), document.getElementById('root'));
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -135,32 +135,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//Start of Main Class, With ES6 refactor
+//Start of Nav Class, With ES6 refactor
 var Nav = function (_React$Component) {
-  _inherits(Nav, _React$Component);
+		_inherits(Nav, _React$Component);
 
-  function Nav() {
-    _classCallCheck(this, Nav);
+		function Nav() {
+				_classCallCheck(this, Nav);
 
-    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
-  }
+				return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+		}
 
-  _createClass(Nav, [{
-    key: "render",
-    value: function render() {
-      return React.createElement(
-        "div",
-        { className: "navbar navbar-expand-lg navbar-light bg-light" },
-        React.createElement(
-          "a",
-          { className: "navbar-brand", href: "localhost:8080" },
-          "Sociality"
-        )
-      );
-    }
-  }]);
+		_createClass(Nav, [{
+				key: "render",
+				value: function render() {
+						return React.createElement(
+								"nav",
+								{ className: "navbar navbar-light bg-light" },
+								React.createElement(
+										"a",
+										{ className: "navbar-brand", href: "#" },
+										React.createElement("img", { src: "../../resources/bootstrap-solid.svg", width: "30", height: "30", className: "d-inline-block align-top mr-2", alt: "" }),
+										React.createElement(
+												"span",
+												null,
+												" Sociality "
+										)
+								),
+								React.createElement(
+										"div",
+										{ className: "float-right" },
+										React.createElement("img", { src: "../../resources/account.png", width: "30", height: "30", className: "d-inline-block align-top mr-2", alt: "" }),
+										React.createElement("img", { src: "../../resources/cog.svg", width: "30", height: "30", className: "d-inline-block align-top", alt: "" })
+								)
+						);
+				}
+		}]);
 
-  return Nav;
+		return Nav;
 }(React.Component);
 
 exports.default = Nav;
