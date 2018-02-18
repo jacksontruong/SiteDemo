@@ -1,12 +1,17 @@
 //Start of Main Class, With ES6 refactor
 
 import Nav from './Nav.js';
+import SideNav from './SideNav.js';
+
 
 var Main = class Container extends React.Component {
   render() {
     return (
-    	<div className="Test">
-    		<Nav></Nav>
+    	<div>
+	    	<Nav></Nav>
+	    	<div className="container">
+	   			<SideNav></SideNav>
+	   		</div>
    		</div>
     )
   }
