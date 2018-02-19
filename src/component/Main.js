@@ -2,7 +2,7 @@
 
 import Nav from './Nav.js';
 import SideNav from './Profile.js';
-
+import Feed from './Feed.js';
 
 var Main = class Container extends React.Component {
   render() {
@@ -10,6 +10,7 @@ var Main = class Container extends React.Component {
     	<div>
 	    	<Nav></Nav>
 	   		<SideNav></SideNav>
+	   		<Feed></Feed>
    		</div>
     )
   }

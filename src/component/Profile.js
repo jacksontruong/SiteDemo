@@ -1,4 +1,4 @@
-//Start of Side Nav Class, With ES6 refactor
+//Start of Profile Class, With ES6 refactor
 export default class SideNav extends React.Component {
 
 	constructor(props) {
@@ -128,7 +128,7 @@ export default class SideNav extends React.Component {
 					</div>
 				</div>
 				<div className="collapse-profile">
-					<p className="text-center p-clean" onClick={this.profileToggler.bind(this)}> Open/Close </p>
+					<p className="text-center p-clean" onClick={this.profileToggler.bind(this)}></p>
 				</div>
 			</div>
     	);

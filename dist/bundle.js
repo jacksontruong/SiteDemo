@@ -87,6 +87,10 @@ var _Profile = __webpack_require__(4);
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
+var _Feed = __webpack_require__(5);
+
+var _Feed2 = _interopRequireDefault(_Feed);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -111,7 +115,8 @@ var Main = function (_React$Component) {
         'div',
         null,
         React.createElement(_Nav2.default, null),
-        React.createElement(_Profile2.default, null)
+        React.createElement(_Profile2.default, null),
+        React.createElement(_Feed2.default, null)
       );
     }
   }]);
@@ -201,7 +206,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//Start of Side Nav Class, With ES6 refactor
+//Start of Profile Class, With ES6 refactor
 var SideNav = function (_React$Component) {
 	_inherits(SideNav, _React$Component);
 
@@ -438,11 +443,7 @@ var SideNav = function (_React$Component) {
 				React.createElement(
 					"div",
 					{ className: "collapse-profile" },
-					React.createElement(
-						"p",
-						{ className: "text-center p-clean", onClick: this.profileToggler.bind(this) },
-						" Open/Close "
-					)
+					React.createElement("p", { className: "text-center p-clean", onClick: this.profileToggler.bind(this) })
 				)
 			);
 		}
@@ -452,6 +453,102 @@ var SideNav = function (_React$Component) {
 }(React.Component);
 
 exports.default = SideNav;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//Start of Feed Class, With ES6 refactor
+var Feed = function (_React$Component) {
+	_inherits(Feed, _React$Component);
+
+	function Feed(props) {
+		_classCallCheck(this, Feed);
+
+		var _this = _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
+
+		_this.state = {
+			numberOfCards: 5
+		};
+		_this.addFeedCard = _this.addFeedCard.bind(_this);
+		_this.fillFeed = _this.fillFeed.bind(_this);
+		return _this;
+	}
+
+	_createClass(Feed, [{
+		key: "addFeedCard",
+		value: function addFeedCard(title, description, imageSrc) {
+			return React.createElement(
+				"div",
+				null,
+				React.createElement("hr", null),
+				React.createElement(
+					"div",
+					{ className: "row feed-card" },
+					React.createElement(
+						"div",
+						{ className: "col-sm-4 text-center align-middle" },
+						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded", alt: "..." })
+					),
+					React.createElement(
+						"div",
+						{ className: "col-sm-8 align-middle" },
+						React.createElement(
+							"h4",
+							{ className: "purple-text" },
+							"Profile Name"
+						),
+						React.createElement("hr", null),
+						"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+					)
+				)
+			);
+		}
+	}, {
+		key: "fillFeed",
+		value: function fillFeed() {
+			var array = [];
+			for (var i = 0; i < this.state.numberOfCards; i++) {
+				array.push(this.addFeedCard("title", "description", "imageSrc"));
+			}
+			return array;
+		}
+	}, {
+		key: "render",
+		value: function render() {
+			return React.createElement(
+				"div",
+				{ className: "container" },
+				this.fillFeed(),
+				React.createElement("hr", null),
+				React.createElement(
+					"button",
+					{ type: "button", className: "btn btn-primary btn-lg btn-block purple-button" },
+					"Load More"
+				)
+			);
+		}
+	}]);
+
+	return Feed;
+}(React.Component);
+
+exports.default = Feed;
 
 /***/ })
 /******/ ]);
