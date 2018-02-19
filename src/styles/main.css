@@ -2,3 +2,13 @@
 	background-color: #333333;
 	border-bottom: 3px solid #999999;
 }
+
+.toggle-button{
+	background-color: #444444;
+}
+
+.toggle-bar{
+	background-color: #444444;
+	width: 100%;
+	border-bottom: 3px solid #999999;
+}

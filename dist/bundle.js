@@ -294,7 +294,7 @@ var SideNav = function (_React$Component) {
 		value: function buildSocialAccounts(social) {
 
 			//Test
-			var social = [{ platform: "Reddit", account: "xChocobars" }, { platform: "Twitter", account: "xChocobars" }, { platform: "Instagram", account: "xChocobars" }, { platform: "Youtube", account: "xChocobars" }, { platform: "Facebook", account: "xChocobars" }];
+			var social = [{ platform: "Reddit", account: "Sample" }, { platform: "Twitter", account: "Sample" }, { platform: "Instagram", account: "Sample" }, { platform: "Youtube", account: "Sample" }, { platform: "Facebook", account: "Sample" }];
 			//Test
 
 			var SocialAccounts = [];
@@ -335,7 +335,7 @@ var SideNav = function (_React$Component) {
 			var activeButton = this.state.allToggle === true ? "active" : "";
 			return React.createElement(
 				"label",
-				{ className: "btn btn-secondary " + activeButton },
+				{ className: "btn btn-secondary toggle-button" + activeButton },
 				React.createElement("input", { id: "All", type: "checkbox", autoComplete: "off", onChange: this.platformToggler.bind(this) }),
 				" All"
 			);
@@ -348,7 +348,7 @@ var SideNav = function (_React$Component) {
 			}).toggle ? "active" : "";
 			return React.createElement(
 				"label",
-				{ className: "btn btn-secondary " + activeButton },
+				{ className: "btn btn-secondary toggle-button" + activeButton },
 				React.createElement("input", { id: platform, type: "checkbox", autoComplete: "off", onChange: this.platformToggler.bind(this) }),
 				" ",
 				platform
@@ -359,7 +359,7 @@ var SideNav = function (_React$Component) {
 		value: function render() {
 			return React.createElement(
 				"div",
-				{ className: "btn-group btn-group-toggle" },
+				{ className: "btn-group btn-group-toggle toggle-bar" },
 				this.buildSocialAccounts(null)
 			);
 		}

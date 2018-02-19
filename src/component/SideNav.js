@@ -45,11 +45,11 @@ export default class SideNav extends React.Component {
 
 		//Test
 		var social = [
-		    {platform : "Reddit", account: "xChocobars"},
-		    {platform : "Twitter", account: "xChocobars"},
-		    {platform : "Instagram", account: "xChocobars"},
-		    {platform : "Youtube", account: "xChocobars"},
-		    {platform : "Facebook", account: "xChocobars"}
+		    {platform : "Reddit", account: "Sample"},
+		    {platform : "Twitter", account: "Sample"},
+		    {platform : "Instagram", account: "Sample"},
+		    {platform : "Youtube", account: "Sample"},
+		    {platform : "Facebook", account: "Sample"}
 		];
 		//Test
 
@@ -69,7 +69,7 @@ export default class SideNav extends React.Component {
 	buildAllAccountTab(){
 		var activeButton = this.state.allToggle === true ? "active" : "";
 		return(
-			<label className={"btn btn-secondary "+activeButton}>
+			<label className={"btn btn-secondary toggle-button"+activeButton}>
 				<input id="All" type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> All
 			</label>
 		);
@@ -78,7 +78,7 @@ export default class SideNav extends React.Component {
 	buildSocialAccountTab(platform, account){
 		var activeButton = this.state.platformToggles.find(x => x.platform === platform).toggle ? "active" : "";
 		return(
-			<label className={"btn btn-secondary "+activeButton}>
+			<label className={"btn btn-secondary toggle-button"+activeButton}>
 				<input id={platform} type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> {platform} 
 			</label>
 		);
@@ -86,7 +86,7 @@ export default class SideNav extends React.Component {
 
 	render() {
     	return (
-    		<div className="btn-group btn-group-toggle">
+    		<div className="btn-group btn-group-toggle toggle-bar">
 				{this.buildSocialAccounts(null)}
 			</div>
     	);
