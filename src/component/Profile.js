@@ -37,6 +37,18 @@ export default class SideNav extends React.Component {
 				}
 			}
 			this.setState({platformToggles: tempArray});
+
+
+			tempArray = this.state.platformToggles
+			var count = 0;
+			for (const key of Object.keys(tempArray)) {
+				if(tempArray[key].toggle == false){
+					count = count + 1;
+					if(count == this.state.platformToggles.length){
+						this.setState({allToggle: true});
+					}
+				}
+			}
 		}
 		else{
 			var tempArray = this.state.platformToggles;
@@ -89,7 +101,7 @@ export default class SideNav extends React.Component {
 	}
 
 	buildAllAccountTab(){
-		var activeButton = this.state.allToggle === true ? "active" : "";
+		var activeButton = this.state.allToggle === true ? " active" : "";
 		return(
 			<label className={"btn btn-secondary toggle-button"+activeButton}>
 				<input id="All" type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> All
@@ -98,7 +110,7 @@ export default class SideNav extends React.Component {
 	}
 
 	buildSocialAccountTab(platform, account){
-		var activeButton = this.state.platformToggles.find(x => x.platform === platform).toggle ? "active" : "";
+		var activeButton = this.state.platformToggles.find(x => x.platform === platform).toggle ? " active" : "";
 		return(
 			<label className={"btn btn-secondary toggle-button"+activeButton}>
 				<input id={platform} type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> {platform} 
@@ -116,7 +128,7 @@ export default class SideNav extends React.Component {
 					</div>
 				</div>
 				<div className="collapse-profile">
-					<p className="text-center" onClick={this.profileToggler.bind(this)}> Open/Close </p>
+					<p className="text-center p-clean" onClick={this.profileToggler.bind(this)}> Open/Close </p>
 				</div>
 			</div>
     	);
