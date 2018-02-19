@@ -83,9 +83,9 @@ var _Nav = __webpack_require__(2);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _SideNav = __webpack_require__(3);
+var _Profile = __webpack_require__(4);
 
-var _SideNav2 = _interopRequireDefault(_SideNav);
+var _Profile2 = _interopRequireDefault(_Profile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,7 +111,7 @@ var Main = function (_React$Component) {
         'div',
         null,
         React.createElement(_Nav2.default, null),
-        React.createElement(_SideNav2.default, null)
+        React.createElement(_Profile2.default, null)
       );
     }
   }]);
@@ -155,7 +155,7 @@ var Nav = function (_React$Component) {
 				value: function render() {
 						return React.createElement(
 								"nav",
-								{ className: "navbar navbar-light bg-light" },
+								{ className: "navbar navbar-light" },
 								React.createElement(
 										"a",
 										{ className: "navbar-brand", href: "#" },
@@ -182,7 +182,8 @@ var Nav = function (_React$Component) {
 exports.default = Nav;
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -211,10 +212,13 @@ var SideNav = function (_React$Component) {
 
 		_this.state = {
 			platformToggles: [{ platform: "Reddit", toggle: false }, { platform: "Twitter", toggle: false }, { platform: "Instagram", toggle: false }, { platform: "Youtube", toggle: false }, { platform: "Facebook", toggle: false }],
-			allToggle: true
+			allToggle: true,
+			profileDisplay: false
 		};
 
 		_this.platformToggler = _this.platformToggler.bind(_this);
+		_this.profileToggler = _this.profileToggler.bind(_this);
+		_this.constructProfile = _this.constructProfile.bind(_this);
 		_this.buildSocialAccounts = _this.buildSocialAccounts.bind(_this);
 		_this.buildAllAccountTab = _this.buildAllAccountTab.bind(_this);
 		_this.buildSocialAccountTab = _this.buildSocialAccountTab.bind(_this);
@@ -222,6 +226,11 @@ var SideNav = function (_React$Component) {
 	}
 
 	_createClass(SideNav, [{
+		key: "profileToggler",
+		value: function profileToggler(e) {
+			this.setState({ profileDisplay: this.state.profileDisplay ? false : true });
+		}
+	}, {
 		key: "platformToggler",
 		value: function platformToggler(e) {
 			if (e.target.id != "All") {
@@ -288,6 +297,30 @@ var SideNav = function (_React$Component) {
 
 				this.setState({ allToggle: this.state.allToggle ? false : true, platformToggles: tempArray });
 			}
+		}
+	}, {
+		key: "constructProfile",
+		value: function constructProfile() {
+			return React.createElement(
+				"div",
+				{ className: "row profile" },
+				React.createElement(
+					"div",
+					{ className: "col-sm-4 text-center align-middle" },
+					React.createElement("img", { src: "../../resources/profile.png", className: "rounded", alt: "..." })
+				),
+				React.createElement(
+					"div",
+					{ className: "col-sm-8 align-middle" },
+					React.createElement(
+						"h2",
+						null,
+						"Profile Name"
+					),
+					React.createElement("hr", null),
+					"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+				)
+			);
 		}
 	}, {
 		key: "buildSocialAccounts",
@@ -359,8 +392,26 @@ var SideNav = function (_React$Component) {
 		value: function render() {
 			return React.createElement(
 				"div",
-				{ className: "btn-group btn-group-toggle toggle-bar" },
-				this.buildSocialAccounts(null)
+				null,
+				React.createElement(
+					"div",
+					{ hidden: !this.state.profileDisplay },
+					this.constructProfile(),
+					React.createElement(
+						"div",
+						{ className: "btn-group btn-group-toggle toggle-bar" },
+						this.buildSocialAccounts(null)
+					)
+				),
+				React.createElement(
+					"div",
+					{ className: "collapse-profile" },
+					React.createElement(
+						"p",
+						{ className: "text-center", onClick: this.profileToggler.bind(this) },
+						" Open/Close "
+					)
+				)
 			);
 		}
 	}]);

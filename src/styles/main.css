@@ -1,14 +1,29 @@
 .navbar{
-	background-color: #333333;
+	background-color: #dcdcdc;
 	border-bottom: 3px solid #999999;
 }
 
 .toggle-button{
-	background-color: #444444;
+	background-color: #dcdcdc;
+	color: #222222;
 }
 
 .toggle-bar{
-	background-color: #444444;
+	background-color: #dcdcdc;
 	width: 100%;
 	border-bottom: 3px solid #999999;
+}
+
+.profile{
+	padding: 1em;
+}
+
+.btn-secondary{
+	border: none;
+}
+
+.collapse-profile{
+	background-color: #b7b7b7;
+	color: #222222;
+	cursor: pointer;
 }

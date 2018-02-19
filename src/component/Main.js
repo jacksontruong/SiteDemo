@@ -1,7 +1,7 @@
 //Start of Main Class, With ES6 refactor
 
 import Nav from './Nav.js';
-import SideNav from './SideNav.js';
+import SideNav from './Profile.js';
 
 
 var Main = class Container extends React.Component {

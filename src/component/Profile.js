@@ -11,13 +11,20 @@ export default class SideNav extends React.Component {
 			    {platform : "Youtube", toggle: false},
 			    {platform : "Facebook", toggle: false}
 			],
-			allToggle: true
+			allToggle: true,
+			profileDisplay: false
 		};
 
 		this.platformToggler = this.platformToggler.bind(this)
+		this.profileToggler = this.profileToggler.bind(this)
+		this.constructProfile = this.constructProfile.bind(this)
 		this.buildSocialAccounts = this.buildSocialAccounts.bind(this)
 		this.buildAllAccountTab = this.buildAllAccountTab.bind(this)
 		this.buildSocialAccountTab = this.buildSocialAccountTab.bind(this)
+	}
+
+	profileToggler(e){
+		this.setState({profileDisplay: this.state.profileDisplay ? false : true});
 	}
 
 	platformToggler(e){
@@ -39,6 +46,21 @@ export default class SideNav extends React.Component {
 			this.setState({allToggle: this.state.allToggle ? false : true, platformToggles: tempArray});
 		}
 
+	}
+
+	constructProfile(){
+		return(
+			<div className="row profile">
+				<div className="col-sm-4 text-center align-middle">
+					<img src="../../resources/profile.png" className="rounded" alt="..."></img>
+				</div>
+				<div className="col-sm-8 align-middle">
+					<h2>Profile Name</h2>
+					<hr></hr>
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+				</div>
+			</div>
+		);
 	}
 
 	buildSocialAccounts(social){
@@ -86,8 +108,16 @@ export default class SideNav extends React.Component {
 
 	render() {
     	return (
-    		<div className="btn-group btn-group-toggle toggle-bar">
-				{this.buildSocialAccounts(null)}
+    		<div>
+	    		<div hidden={!this.state.profileDisplay}>
+		    		{this.constructProfile()}
+		    		<div className="btn-group btn-group-toggle toggle-bar">
+						{this.buildSocialAccounts(null)}
+					</div>
+				</div>
+				<div className="collapse-profile">
+					<p className="text-center" onClick={this.profileToggler.bind(this)}> Open/Close </p>
+				</div>
 			</div>
     	);
   	}	
