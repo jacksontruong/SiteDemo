@@ -306,33 +306,35 @@ var SideNav = function (_React$Component) {
 					}
 				}
 			} else {
-				var tempArray = this.state.platformToggles;
-				var _iteratorNormalCompletion3 = true;
-				var _didIteratorError3 = false;
-				var _iteratorError3 = undefined;
+				if (this.state.allToggle != true) {
+					var tempArray = this.state.platformToggles;
+					var _iteratorNormalCompletion3 = true;
+					var _didIteratorError3 = false;
+					var _iteratorError3 = undefined;
 
-				try {
-					for (var _iterator3 = Object.keys(tempArray)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-						var _key2 = _step3.value;
-
-						tempArray[_key2].toggle = false;
-					}
-				} catch (err) {
-					_didIteratorError3 = true;
-					_iteratorError3 = err;
-				} finally {
 					try {
-						if (!_iteratorNormalCompletion3 && _iterator3.return) {
-							_iterator3.return();
+						for (var _iterator3 = Object.keys(tempArray)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+							var _key2 = _step3.value;
+
+							tempArray[_key2].toggle = false;
 						}
+					} catch (err) {
+						_didIteratorError3 = true;
+						_iteratorError3 = err;
 					} finally {
-						if (_didIteratorError3) {
-							throw _iteratorError3;
+						try {
+							if (!_iteratorNormalCompletion3 && _iterator3.return) {
+								_iterator3.return();
+							}
+						} finally {
+							if (_didIteratorError3) {
+								throw _iteratorError3;
+							}
 						}
 					}
-				}
 
-				this.setState({ allToggle: this.state.allToggle ? false : true, platformToggles: tempArray });
+					this.setState({ allToggle: this.state.allToggle ? false : true, platformToggles: tempArray });
+				}
 			}
 		}
 	}, {
@@ -492,7 +494,7 @@ var Feed = function (_React$Component) {
 
 	_createClass(Feed, [{
 		key: "addFeedCard",
-		value: function addFeedCard(title, description, imageSrc) {
+		value: function addFeedCard(title, description, imageSrc, timestamp) {
 			return React.createElement(
 				"div",
 				null,
@@ -503,7 +505,12 @@ var Feed = function (_React$Component) {
 					React.createElement(
 						"div",
 						{ className: "col-sm-4 text-center align-middle" },
-						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded", alt: "..." })
+						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded", alt: "..." }),
+						React.createElement(
+							"span",
+							null,
+							" 2/19/2018 @ 12:00am "
+						)
 					),
 					React.createElement(
 						"div",

@@ -10,7 +10,7 @@ export default class Feed extends React.Component {
 		this.fillFeed = this.fillFeed.bind(this)
 	}
 
-	addFeedCard(title, description, imageSrc) {
+	addFeedCard(title, description, imageSrc, timestamp) {
 		return (
 			<div>
 				<hr></hr>
@@ -18,6 +18,7 @@ export default class Feed extends React.Component {
 				<div className="row feed-card">
 					<div className="col-sm-4 text-center align-middle">
 						<img src="../../resources/bg.svg" className="rounded" alt="..."></img>
+						<span> 2/19/2018 @ 12:00am </span>
 					</div>
 					<div className="col-sm-8 align-middle">
 						<h4 className="purple-text">Profile Name</h4>

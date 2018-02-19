@@ -51,11 +51,13 @@ export default class SideNav extends React.Component {
 			}
 		}
 		else{
-			var tempArray = this.state.platformToggles;
-			for (const key of Object.keys(tempArray)) {
-				tempArray[key].toggle = false;
+			if(this.state.allToggle != true){
+				var tempArray = this.state.platformToggles;
+				for (const key of Object.keys(tempArray)) {
+					tempArray[key].toggle = false;
+				}
+				this.setState({allToggle: this.state.allToggle ? false : true, platformToggles: tempArray});
 			}
-			this.setState({allToggle: this.state.allToggle ? false : true, platformToggles: tempArray});
 		}
 
 	}

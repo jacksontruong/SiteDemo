@@ -44,6 +44,7 @@
 	padding: 1em;
 	border: 2px solid #ffffff;
 	border-radius: 10px;
+	cursor: pointer;
 }
 
 .purple-button{
