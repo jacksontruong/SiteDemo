@@ -111,11 +111,7 @@ var Main = function (_React$Component) {
         'div',
         null,
         React.createElement(_Nav2.default, null),
-        React.createElement(
-          'div',
-          { className: 'container' },
-          React.createElement(_SideNav2.default, null)
-        )
+        React.createElement(_SideNav2.default, null)
       );
     }
   }]);
@@ -208,28 +204,163 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SideNav = function (_React$Component) {
 	_inherits(SideNav, _React$Component);
 
-	function SideNav() {
+	function SideNav(props) {
 		_classCallCheck(this, SideNav);
 
-		return _possibleConstructorReturn(this, (SideNav.__proto__ || Object.getPrototypeOf(SideNav)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (SideNav.__proto__ || Object.getPrototypeOf(SideNav)).call(this, props));
+
+		_this.state = {
+			platformToggles: [{ platform: "Reddit", toggle: false }, { platform: "Twitter", toggle: false }, { platform: "Instagram", toggle: false }, { platform: "Youtube", toggle: false }, { platform: "Facebook", toggle: false }],
+			allToggle: true
+		};
+
+		_this.platformToggler = _this.platformToggler.bind(_this);
+		_this.buildSocialAccounts = _this.buildSocialAccounts.bind(_this);
+		_this.buildAllAccountTab = _this.buildAllAccountTab.bind(_this);
+		_this.buildSocialAccountTab = _this.buildSocialAccountTab.bind(_this);
+		return _this;
 	}
 
 	_createClass(SideNav, [{
+		key: "platformToggler",
+		value: function platformToggler(e) {
+			if (e.target.id != "All") {
+				var tempArray = this.state.platformToggles;
+				tempArray.find(function (x) {
+					return x.platform === e.target.id;
+				}).toggle = tempArray.find(function (x) {
+					return x.platform === e.target.id;
+				}).toggle === true ? false : true;
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = Object.keys(tempArray)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var key = _step.value;
+
+						if (tempArray[key].toggle == true) {
+							this.setState({ allToggle: false });
+						}
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
+					}
+				}
+
+				this.setState({ platformToggles: tempArray });
+			} else {
+				var tempArray = this.state.platformToggles;
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
+
+				try {
+					for (var _iterator2 = Object.keys(tempArray)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var _key = _step2.value;
+
+						tempArray[_key].toggle = false;
+					}
+				} catch (err) {
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion2 && _iterator2.return) {
+							_iterator2.return();
+						}
+					} finally {
+						if (_didIteratorError2) {
+							throw _iteratorError2;
+						}
+					}
+				}
+
+				this.setState({ allToggle: this.state.allToggle ? false : true, platformToggles: tempArray });
+			}
+		}
+	}, {
+		key: "buildSocialAccounts",
+		value: function buildSocialAccounts(social) {
+
+			//Test
+			var social = [{ platform: "Reddit", account: "xChocobars" }, { platform: "Twitter", account: "xChocobars" }, { platform: "Instagram", account: "xChocobars" }, { platform: "Youtube", account: "xChocobars" }, { platform: "Facebook", account: "xChocobars" }];
+			//Test
+
+			var SocialAccounts = [];
+			var _iteratorNormalCompletion3 = true;
+			var _didIteratorError3 = false;
+			var _iteratorError3 = undefined;
+
+			try {
+				for (var _iterator3 = Object.keys(social)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+					var key = _step3.value;
+
+					SocialAccounts.push(this.buildSocialAccountTab(social[key].platform, social[key].account));
+				}
+			} catch (err) {
+				_didIteratorError3 = true;
+				_iteratorError3 = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion3 && _iterator3.return) {
+						_iterator3.return();
+					}
+				} finally {
+					if (_didIteratorError3) {
+						throw _iteratorError3;
+					}
+				}
+			}
+
+			if (SocialAccounts.length >= 2) {
+				SocialAccounts.unshift(this.buildAllAccountTab());
+			}
+
+			return SocialAccounts;
+		}
+	}, {
+		key: "buildAllAccountTab",
+		value: function buildAllAccountTab() {
+			var activeButton = this.state.allToggle === true ? "active" : "";
+			return React.createElement(
+				"label",
+				{ className: "btn btn-secondary " + activeButton },
+				React.createElement("input", { id: "All", type: "checkbox", autoComplete: "off", onChange: this.platformToggler.bind(this) }),
+				" All"
+			);
+		}
+	}, {
+		key: "buildSocialAccountTab",
+		value: function buildSocialAccountTab(platform, account) {
+			var activeButton = this.state.platformToggles.find(function (x) {
+				return x.platform === platform;
+			}).toggle ? "active" : "";
+			return React.createElement(
+				"label",
+				{ className: "btn btn-secondary " + activeButton },
+				React.createElement("input", { id: platform, type: "checkbox", autoComplete: "off", onChange: this.platformToggler.bind(this) }),
+				" ",
+				platform
+			);
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			return React.createElement(
 				"div",
-				null,
-				React.createElement(
-					"ul",
-					{ className: "list-group" },
-					React.createElement(
-						"li",
-						{ className: "list-group-item d-flex justify-content-between align-items-left" },
-						"All"
-					),
-					buildSocialAccounts(null)
-				)
+				{ className: "btn-group btn-group-toggle" },
+				this.buildSocialAccounts(null)
 			);
 		}
 	}]);
@@ -238,60 +369,6 @@ var SideNav = function (_React$Component) {
 }(React.Component);
 
 exports.default = SideNav;
-
-
-function buildSocialAccounts(social) {
-
-	//Test
-	var social = [{ platform: "Reddit", account: "sameple" }, { platform: "Twitter", account: "sameple" }, { platform: "Instagram", account: "sameple" }];
-	//Test
-
-	var SocialAccounts = [];
-	var _iteratorNormalCompletion = true;
-	var _didIteratorError = false;
-	var _iteratorError = undefined;
-
-	try {
-		for (var _iterator = Object.keys(social)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-			var key = _step.value;
-
-			SocialAccounts.push(buildSocialAccountTab(key, social[key]));
-		}
-	} catch (err) {
-		_didIteratorError = true;
-		_iteratorError = err;
-	} finally {
-		try {
-			if (!_iteratorNormalCompletion && _iterator.return) {
-				_iterator.return();
-			}
-		} finally {
-			if (_didIteratorError) {
-				throw _iteratorError;
-			}
-		}
-	}
-
-	console.log(SocialAccounts);
-
-	return SocialAccounts;
-}
-
-function buildSocialAccountTab(platform, account) {
-	return [React.createElement(
-		"li",
-		{ className: "list-group-item d-flex justify-content-between align-items-left" },
-		React.createElement(
-			"span",
-			null,
-			" ",
-			platform,
-			": ",
-			account,
-			" "
-		)
-	)];
-}
 
 /***/ })
 /******/ ]);

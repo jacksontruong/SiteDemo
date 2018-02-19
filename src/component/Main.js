@@ -9,9 +9,7 @@ var Main = class Container extends React.Component {
     return (
     	<div>
 	    	<Nav></Nav>
-	    	<div className="container">
-	   			<SideNav></SideNav>
-	   		</div>
+	   		<SideNav></SideNav>
    		</div>
     )
   }
