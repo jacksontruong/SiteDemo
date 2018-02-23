@@ -486,7 +486,11 @@ var Feed = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
 
 		_this.state = {
-			numberOfCards: 1
+			numberOfCards: 1,
+			instagram_data: [],
+			reddit_data: [],
+			youtube_data: [],
+			twitter_data: []
 		};
 		_this.addFeedCard = _this.addFeedCard.bind(_this);
 		_this.fillFeed = _this.fillFeed.bind(_this);
@@ -506,7 +510,7 @@ var Feed = function (_React$Component) {
 					React.createElement(
 						"div",
 						{ className: "col-sm-4 text-center align-middle", key: "div-pic" + num },
-						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded", alt: "..." }),
+						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded w-100", alt: "..." }),
 						React.createElement(
 							"span",
 							null,
@@ -531,10 +535,28 @@ var Feed = function (_React$Component) {
 		key: "fillFeed",
 		value: function fillFeed() {
 			var array = [];
-			for (var i = 0; i < this.state.numberOfCards; i++) {
+			for (var x in this.state.instagram_data) {
 				array.push(this.addFeedCard("title", "description", "imageSrc", "date", i));
 			}
 			return array;
+		}
+	}, {
+		key: "componentWillMount",
+		value: function componentWillMount() {
+			this.setState({ instagram_data: (0, _api.getInstagram)(function (data) {
+					var instagram_array = [];
+					for (var x in data) {
+						var obj = {
+							text: data[x].caption.text,
+							img: data[x].images.standard_resolution,
+							link: data[x].link,
+							time: data[x].created_time
+						};
+						instagram_array.push(obj);
+					}
+					return instagram_array;
+				}, 10)
+			});
 		}
 	}, {
 		key: "render",
@@ -568,42 +590,24 @@ exports.default = Feed;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+exports.getInstagram = getInstagram;
 //https://www.instagram.com/developer/
 
-
-var API = function () {
-	function API() {
-		_classCallCheck(this, API);
-	}
-
-	_createClass(API, [{
-		key: 'getInstagram',
-		value: function getInstagram(num_photos) {
-			var token = '1362124742.3ad74ca.6df307b8ac184c2d830f6bd7c2ac5644';
-			$.ajax({
-				url: 'https://api.instagram.com/v1/users/self/media/recent',
-				dataType: 'jsonp',
-				type: 'GET',
-				data: { access_token: token, count: num_photos },
-				success: function success(data) {
-					console.log(data);
-				},
-				error: function error(data) {
-					console.log(data);
-				}
-			});
+function getInstagram(handle_data, num_photos) {
+	var token = '1362124742.3ad74ca.6df307b8ac184c2d830f6bd7c2ac5644';
+	$.ajax({
+		url: 'https://api.instagram.com/v1/users/self/media/recent',
+		dataType: 'jsonp',
+		type: 'GET',
+		data: { access_token: token, count: num_photos },
+		success: function success(data) {
+			handle_data(data.data);
+		},
+		error: function error(data) {
+			console.log(data);
 		}
-	}]);
-
-	return API;
-}();
-
-exports.default = API;
+	});
+}
 
 /***/ })
 /******/ ]);
