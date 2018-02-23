@@ -105,8 +105,8 @@ export default class SideNav extends React.Component {
 	buildAllAccountTab(){
 		var activeButton = this.state.allToggle === true ? " active" : "";
 		return(
-			<label className={"btn btn-secondary toggle-button"+activeButton}>
-				<input id="All" type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> All
+			<label className={"btn btn-secondary toggle-button"+activeButton} key={"all-tab"}>
+				<input id="All" type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)} key={"all-input-tab"}></input> All
 			</label>
 		);
 	}
@@ -114,8 +114,8 @@ export default class SideNav extends React.Component {
 	buildSocialAccountTab(platform, account){
 		var activeButton = this.state.platformToggles.find(x => x.platform === platform).toggle ? " active" : "";
 		return(
-			<label className={"btn btn-secondary toggle-button"+activeButton}>
-				<input id={platform} type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)}></input> {platform} 
+			<label className={"btn btn-secondary toggle-button"+activeButton} key={platform+"-"+account+"-tab"}>
+				<input id={platform} type="checkbox" autoComplete="off" onChange={this.platformToggler.bind(this)} key={platform+"-"+account+"-button"}></input> {platform} 
 			</label>
 		);
 	}
