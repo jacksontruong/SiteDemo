@@ -45,21 +45,19 @@ export default class Feed extends React.Component {
 	}
 
 	componentWillMount(){
-		this.setState({instagram_data:
-			getInstagram(function(data){
-				var instagram_array = [];
-				for(var x in data){
-					var obj = {
-						text: data[x].caption.text,
-						img: data[x].images.standard_resolution,
-						link: data[x].link,
-						time: data[x].created_time
-					}
-					instagram_array.push(obj);
+		var instagram_array = [];
+		getInstagram(function(data){
+			for(var x in data){
+				var obj = {
+					text: data[x].caption.text,
+					img: data[x].images.standard_resolution,
+					link: data[x].link,
+					time: data[x].created_time
 				}
-				return instagram_array;
-			},10)
-		});
+				instagram_array.push(obj);
+			}
+		},10);
+		this.setState({instagram_data: instagram_array});
 	}
 
 	render() {

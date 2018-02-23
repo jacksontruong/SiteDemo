@@ -543,20 +543,19 @@ var Feed = function (_React$Component) {
 	}, {
 		key: "componentWillMount",
 		value: function componentWillMount() {
-			this.setState({ instagram_data: (0, _api.getInstagram)(function (data) {
-					var instagram_array = [];
-					for (var x in data) {
-						var obj = {
-							text: data[x].caption.text,
-							img: data[x].images.standard_resolution,
-							link: data[x].link,
-							time: data[x].created_time
-						};
-						instagram_array.push(obj);
-					}
-					return instagram_array;
-				}, 10)
-			});
+			var instagram_array = [];
+			(0, _api.getInstagram)(function (data) {
+				for (var x in data) {
+					var obj = {
+						text: data[x].caption.text,
+						img: data[x].images.standard_resolution,
+						link: data[x].link,
+						time: data[x].created_time
+					};
+					instagram_array.push(obj);
+				}
+			}, 10);
+			this.setState({ instagram_data: instagram_array });
 		}
 	}, {
 		key: "render",
