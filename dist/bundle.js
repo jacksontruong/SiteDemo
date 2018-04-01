@@ -486,20 +486,26 @@ var Feed = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
 
 		_this.state = {
-			numberOfCards: 1,
+			numberOfCards: 10,
 			instagram_data: [],
 			reddit_data: [],
 			youtube_data: [],
 			twitter_data: []
 		};
-		_this.addFeedCard = _this.addFeedCard.bind(_this);
-		_this.fillFeed = _this.fillFeed.bind(_this);
+		_this.add_Feed_Card = _this.add_Feed_Card.bind(_this);
+		_this.fill_Feed = _this.fill_Feed.bind(_this);
+		_this.success_Callback = _this.success_Callback.bind(_this);
 		return _this;
 	}
 
 	_createClass(Feed, [{
-		key: "addFeedCard",
-		value: function addFeedCard(title, description, imageSrc, timestamp, num) {
+		key: "componentDidMount",
+		value: function componentDidMount() {
+			(0, _api.getInstagram)(this.success_Callback, 10);
+		}
+	}, {
+		key: "add_Feed_Card",
+		value: function add_Feed_Card(title, description, imageSrc, timestamp, num) {
 			return React.createElement(
 				"div",
 				{ key: "div-wrap" + num },
@@ -510,11 +516,11 @@ var Feed = function (_React$Component) {
 					React.createElement(
 						"div",
 						{ className: "col-sm-4 text-center align-middle", key: "div-pic" + num },
-						React.createElement("img", { src: "../../resources/bg.svg", className: "rounded w-100", alt: "..." }),
+						React.createElement("img", { src: imageSrc, className: "rounded w-100", alt: "..." }),
 						React.createElement(
 							"span",
 							null,
-							" 2/19/2018 @ 12:00am "
+							timestamp
 						)
 					),
 					React.createElement(
@@ -526,35 +532,38 @@ var Feed = function (_React$Component) {
 							"Profile Name"
 						),
 						React.createElement("hr", null),
-						"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+						React.createElement(
+							"span",
+							null,
+							description
+						)
 					)
 				)
 			);
 		}
 	}, {
-		key: "fillFeed",
-		value: function fillFeed() {
+		key: "fill_Feed",
+		value: function fill_Feed() {
 			var array = [];
 			for (var x in this.state.instagram_data) {
-				array.push(this.addFeedCard("title", "description", "imageSrc", "date", i));
+				console.log(this.state.instagram_data[x]);
+				array.push(this.add_Feed_Card("title", this.state.instagram_data[x].text, this.state.instagram_data[x].img.url, this.state.instagram_data[x].time, x));
 			}
 			return array;
 		}
 	}, {
-		key: "componentWillMount",
-		value: function componentWillMount() {
+		key: "success_Callback",
+		value: function success_Callback(data) {
 			var instagram_array = [];
-			(0, _api.getInstagram)(function (data) {
-				for (var x in data) {
-					var obj = {
-						text: data[x].caption.text,
-						img: data[x].images.standard_resolution,
-						link: data[x].link,
-						time: data[x].created_time
-					};
-					instagram_array.push(obj);
-				}
-			}, 10);
+			for (var x in data) {
+				var obj = {
+					text: data[x].caption.text,
+					img: data[x].images.standard_resolution,
+					link: data[x].link,
+					time: data[x].created_time
+				};
+				instagram_array.push(obj);
+			}
 			this.setState({ instagram_data: instagram_array });
 		}
 	}, {
@@ -563,7 +572,7 @@ var Feed = function (_React$Component) {
 			return React.createElement(
 				"div",
 				{ className: "container" },
-				this.fillFeed(),
+				this.fill_Feed(),
 				React.createElement("hr", null),
 				React.createElement(
 					"button",

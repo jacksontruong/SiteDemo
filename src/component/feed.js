@@ -6,64 +6,73 @@ export default class Feed extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			numberOfCards: 1,
+			numberOfCards: 10,
 			instagram_data: [],
 			reddit_data: [],
 			youtube_data: [],
 			twitter_data: []
 		};
-		this.addFeedCard = this.addFeedCard.bind(this)
-		this.fillFeed = this.fillFeed.bind(this)
+		this.add_Feed_Card = this.add_Feed_Card.bind(this)
+		this.fill_Feed = this.fill_Feed.bind(this)
+		this.success_Callback = this.success_Callback.bind(this)
 	}
 
-	addFeedCard(title, description, imageSrc, timestamp, num) {
+	componentDidMount(){
+		getInstagram(this.success_Callback,10);
+	}
+
+	add_Feed_Card(title, description, imageSrc, timestamp, num) {
 		return (
 			<div key={"div-wrap"+num}>
 				<hr></hr>
 				<div className="row feed-card" key={"div-box"+num}>
 					<div className="col-sm-4 text-center align-middle" key={"div-pic"+num}>
-						<img src="../../resources/bg.svg" className="rounded w-100" alt="..."></img>
-						<span> 2/19/2018 @ 12:00am </span>
+						<img src={imageSrc} className="rounded w-100" alt="..."></img>
+						<span>{timestamp}</span>
 					</div>
 					<div className="col-sm-8 align-middle" key={"div-text"+num}>
 						<h4 className="purple-text" key={"title"+num}>Profile Name</h4>
-						<hr ></hr>
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+						<hr></hr>
+						<span>{description}</span>
 					</div>
 				</div>
-
 			</div>
 		)
 	}
 
-	fillFeed(){
+	fill_Feed(){
 		var array = [];
 		for(var x in this.state.instagram_data){
-		    array.push(this.addFeedCard("title", "description", "imageSrc","date",i));
+			console.log(this.state.instagram_data[x])
+		    array.push(this.add_Feed_Card(
+		    	"title", 
+		    	this.state.instagram_data[x].text, 
+		    	this.state.instagram_data[x].img.url, 
+		    	this.state.instagram_data[x].time, 
+		    	x
+		    ));
 		}
 		return array;
 	}
 
-	componentWillMount(){
+	success_Callback(data){
 		var instagram_array = [];
-		getInstagram(function(data){
-			for(var x in data){
-				var obj = {
-					text: data[x].caption.text,
-					img: data[x].images.standard_resolution,
-					link: data[x].link,
-					time: data[x].created_time
-				}
-				instagram_array.push(obj);
+		for(var x in data){
+			var obj = {
+				text: data[x].caption.text,
+				img: data[x].images.standard_resolution,
+				link: data[x].link,
+				time: data[x].created_time
 			}
-		},10);
+			instagram_array.push(obj);
+		}
 		this.setState({instagram_data: instagram_array});
 	}
 
 	render() {
 		return (
 			<div className="container">
-				{this.fillFeed()}
+				{this.fill_Feed()}
 				<hr></hr>
 				<button type="button" className="btn btn-primary btn-lg btn-block purple-button">Load More</button>
 			</div>
