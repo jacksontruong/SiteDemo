@@ -8,10 +8,25 @@ export function getInstagram(handle_data, num_photos) {
 		type: 'GET',
 		data: {access_token: token, count: num_photos},
 		success: function(data){
-			handle_data(data.data);
+			handle_data(generate_instagram_feed(data.data));
 	 	},
 		error: function(data){
 			console.log(data);
 		}
 	});
+}
+
+function generate_instagram_feed(data){
+	var instagram_raw_feed = [];
+
+	for(var x in data){
+	    instagram_raw_feed.push({
+	    	title: data[x].user.full_name,
+	    	description: data[x].caption.text, 
+	    	link: data[x].link,
+	    	image: data[x].images.standard_resolution.url, 
+	    	time: data[x].created_time
+	    });
+	}
+	return instagram_raw_feed;
 }
