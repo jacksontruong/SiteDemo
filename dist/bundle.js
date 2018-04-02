@@ -470,7 +470,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _api = __webpack_require__(5);
 
-var _helper = __webpack_require__(6);
+var _Card = __webpack_require__(7);
+
+var _Card2 = _interopRequireDefault(_Card);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -492,7 +496,6 @@ var Feed = function (_React$Component) {
 			feed_data: []
 		};
 		_this.success_Callback = _this.success_Callback.bind(_this);
-		_this.add_Feed_Card = _this.add_Feed_Card.bind(_this);
 		_this.generate_Feed = _this.generate_Feed.bind(_this);
 		_this.load_More = _this.load_More.bind(_this);
 		return _this;
@@ -515,51 +518,6 @@ var Feed = function (_React$Component) {
 			this.setState({ feed_data: temp_feed_data });
 		}
 	}, {
-		key: "add_Feed_Card",
-		value: function add_Feed_Card(card, num) {
-			var title = card.title;
-			var link = card.link;
-			var description = card.description;
-			var imageSrc = card.image;
-			var timestamp = (0, _helper.epochToLocal)(card.time);
-			var num = num;
-
-			return React.createElement(
-				"div",
-				{ key: "div-wrap" + num },
-				React.createElement("hr", null),
-				React.createElement(
-					"div",
-					{ className: "row feed-card", key: "div-box" + num },
-					React.createElement(
-						"div",
-						{ className: "col-sm-4 text-center align-middle", key: "div-pic" + num },
-						React.createElement("img", { src: imageSrc, className: "rounded w-100", alt: "..." }),
-						React.createElement(
-							"span",
-							null,
-							timestamp
-						)
-					),
-					React.createElement(
-						"div",
-						{ className: "col-sm-8 align-middle", key: "div-text" + num },
-						React.createElement(
-							"h4",
-							{ className: "purple-text", key: "title" + num },
-							title
-						),
-						React.createElement("hr", null),
-						React.createElement(
-							"span",
-							null,
-							description
-						)
-					)
-				)
-			);
-		}
-	}, {
 		key: "generate_Feed",
 		value: function generate_Feed() {
 			var currentFeed = [];
@@ -574,7 +532,7 @@ var Feed = function (_React$Component) {
 
 			var feed = [];
 			for (var x in currentFeed) {
-				feed.push(this.add_Feed_Card(currentFeed[x], x));
+				feed.push(React.createElement(_Card2.default, { card: currentFeed[x], num: x, key: "card-" + x }));
 			}
 			return feed;
 		}
@@ -666,6 +624,94 @@ function epochToLocal(time) {
 	var d = new Date(time * 1000);
 	return d.toString();
 }
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _helper = __webpack_require__(6);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//Start of Card Class, With ES6 refactor
+var Card = function (_React$Component) {
+	_inherits(Card, _React$Component);
+
+	function Card(props) {
+		_classCallCheck(this, Card);
+
+		var _this = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+
+		console.log(props);
+
+		_this.state = {
+			title: props.card.title,
+			link: props.card.link,
+			description: props.card.description,
+			imageSrc: props.card.image,
+			timestamp: (0, _helper.epochToLocal)(props.card.time),
+			num: props.num
+		};
+		return _this;
+	}
+
+	_createClass(Card, [{
+		key: "render",
+		value: function render() {
+			return React.createElement(
+				"div",
+				{ key: "div-wrap" + this.state.num },
+				React.createElement("hr", null),
+				React.createElement(
+					"div",
+					{ className: "row feed-card", key: "div-box" + this.state.num },
+					React.createElement(
+						"div",
+						{ className: "col-sm-4 text-center align-middle", key: "div-pic" + this.state.num },
+						React.createElement("img", { src: this.state.imageSrc, className: "rounded w-100", alt: "..." }),
+						React.createElement(
+							"span",
+							null,
+							this.state.timestamp
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "col-sm-8 align-middle", key: "div-text" + this.state.num },
+						React.createElement(
+							"h4",
+							{ className: "purple-text", key: "title" + this.state.num },
+							this.state.title
+						),
+						React.createElement("hr", null),
+						React.createElement(
+							"span",
+							null,
+							this.state.description
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Card;
+}(React.Component);
+
+exports.default = Card;
 
 /***/ })
 /******/ ]);
